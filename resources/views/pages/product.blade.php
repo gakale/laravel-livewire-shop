@@ -40,7 +40,7 @@
                     <div class="p-4 p-md-5">
                         <div class="d-flex justify-content-between align-items-start mb-3">
                             <h1 class="mb-0">{{ $product->name }}</h1>
-                            <livewire:add-to-wishlist :product-id="$product->id" :wire:key="'wishlist-'.$product->id" />
+                            <livewire:add-to-wishlist :product-id="$product->id" wire:key="wishlist-{{ $product->id }}" />
                         </div>
                         
                         {{-- Ratings --}}
@@ -182,7 +182,7 @@
     
     {{-- Reviews Section --}}
     <div class="mb-5">
-        <livewire:product-reviews :product="$product" :wire:key="'reviews-'.$product->id" />
+        <livewire:product-reviews :product="$product" wire:key="reviews-{{ $product->id }}" />
     </div>
 </div>
 @endsection

@@ -51,11 +51,11 @@
                             <a href="{{ route('livewire-shop.product', $product) }}" class="btn btn-outline-primary flex-grow-1">
                                 <i class="bi bi-eye"></i> Détails
                             </a>
-                            <livewire:add-to-wishlist :product-id="$product->id" :wire:key="'wishlist-'.$product->id" />
+                            <livewire:add-to-wishlist :product-id="$product->id" wire:key="wishlist-{{ $product->id }}" />
                         </div>
                         
                         <div class="mt-2">
-                            <livewire:add-to-cart :product="$product" :key="'quick-add-'.$product->id" :quickAdd="true" />
+                            <livewire:add-to-cart :product="$product" wire:key="quick-add-{{ $product->id }}" :quick-add="true" />
                         </div>
                     </div>
                 </div>

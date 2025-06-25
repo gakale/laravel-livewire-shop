@@ -132,7 +132,7 @@
                             
                             {{-- Bouton wishlist --}}
                             <div class="position-absolute top-0 end-0 m-2">
-                                <livewire:add-to-wishlist :product-id="$product->id" :wire:key="'wishlist-'.$product->id" />
+                                <livewire:add-to-wishlist :product-id="$product->id" wire:key="wishlist-{{ $product->id }}" />
                             </div>
                             
                             {{-- Image --}}
@@ -176,7 +176,7 @@
                                 @endif
                                 
                                 <div class="mt-auto">
-                                    <livewire:add-to-cart :product="$product" :key="'add-to-cart-'.$product->id" />
+                                    <livewire:add-to-cart :product="$product" wire:key="add-to-cart-{{ $product->id }}" />
                                 </div>
                             </div>
                         </div>

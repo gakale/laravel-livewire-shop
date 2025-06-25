@@ -77,7 +77,7 @@
                                 <div class="text-warning mb-2">{{ $product->stars_display }}</div>
                                 <p class="text-primary fw-bold">{{ $product->formatted_current_price }}</p>
                                 <div class="mt-auto">
-                                    <livewire:add-to-cart :product="$product" :key="'featured-'.$product->id" />
+                                    <livewire:add-to-cart :product="$product" wire:key="featured-{{ $product->id }}" />
                                 </div>
                             </div>
                         </div>

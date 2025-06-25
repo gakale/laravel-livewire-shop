@@ -57,10 +57,10 @@
                                     </a>
                                     
                                     @if($item->product->isInStock())
-                                        <livewire:add-to-cart :product="$item->product" :wire:key="'add-to-cart-'.$item->product->id" />
+                                        <livewire:add-to-cart :product="$item->product" wire:key="add-to-cart-{{ $item->product->id }}" />
                                     @endif
                                     
-                                    <livewire:add-to-wishlist :product-id="$item->product->id" :wire:key="'wishlist-'.$item->product->id" />
+                                    <livewire:add-to-wishlist :product-id="$item->product->id" wire:key="wishlist-{{ $item->product->id }}" />
                                 </div>
                             </div>
                         </div>
