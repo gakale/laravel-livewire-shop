@@ -1,0 +1,63 @@
+<?php
+
+use Illuminate\Support\Facades\Route;
+
+/*
+|--------------------------------------------------------------------------
+| Routes de la Boutique Laravel Livewire
+|--------------------------------------------------------------------------
+|
+| Ces routes sont automatiquement installées par le package Laravel Livewire Shop
+| et fournissent toutes les fonctionnalités de base pour votre boutique.
+|
+*/
+
+// Routes publiques
+Route::middleware(['web'])->group(function () {
+    // Pages principales
+    Route::get('/boutique', function () {
+        return view('livewire-shop::pages.shop-with-search');
+    })->name('shop.index');
+    
+    Route::get('/produit/{slug}', function ($slug) {
+        $product = \VotreNamespace\LaravelLivewireShop\Models\Product::where('slug', $slug)->firstOrFail();
+        return view('livewire-shop::pages.product', compact('product'));
+    })->name('shop.product.show');
+    
+    Route::get('/panier', function () {
+        return view('livewire-shop::pages.cart');
+    })->name('shop.cart');
+    
+    Route::get('/commander', function () {
+        return view('livewire-shop::pages.checkout');
+    })->name('shop.checkout');
+
+    // Confirmation de commande
+    Route::get('/commande/confirmation/{order}', function ($order) {
+        $order = \VotreNamespace\LaravelLivewireShop\Models\Order::findOrFail($order);
+        return view('livewire-shop::pages.order-confirmation', compact('order'));
+    })->name('shop.order.confirmation');
+});
+
+// Routes d'administration (protégées)
+Route::middleware(['web', 'auth', 'admin'])->prefix('admin')->group(function () {
+    Route::get('/dashboard', function () {
+        return view('livewire-shop::admin.dashboard');
+    })->name('shop.admin.dashboard');
+    
+    Route::get('/produits', function () {
+        return view('livewire-shop::admin.products.index');
+    })->name('shop.admin.products');
+    
+    Route::get('/commandes', function () {
+        return view('livewire-shop::admin.orders.index');
+    })->name('shop.admin.orders');
+    
+    Route::get('/categories', function () {
+        return view('livewire-shop::admin.categories.index');
+    })->name('shop.admin.categories');
+    
+    Route::get('/codes-promo', function () {
+        return view('livewire-shop::admin.coupons.index');
+    })->name('shop.admin.coupons');
+});

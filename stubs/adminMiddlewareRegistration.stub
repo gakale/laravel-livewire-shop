@@ -1,0 +1,9 @@
+// Dans bootstrap/app.php
+
+// Enregistrez le middleware Admin pour les routes d'administration de la boutique
+->withMiddleware(function (Illuminate\Foundation\Configuration\Middleware $middleware) {
+    // ... autres middlewares
+    
+    // Middleware pour l'accès administrateur à la boutique
+    $middleware->alias('admin', \App\Http\Middleware\AdminMiddleware::class);
+})
