@@ -7,6 +7,22 @@ use LaravelLivewireShop\LaravelLivewireShop\Models\Product;
 
 class WishlistService
 {
+    /**
+     * Session ID ou User ID pour identification
+     */
+    protected $identifier = [];
+    
+    /**
+     * Constructeur qui initialise l'identifiant
+     */
+    public function __construct()
+    {
+        $this->identifier = $this->getIdentifier();
+    }
+    
+    /**
+     * Récupère l'identifiant de l'utilisateur actuel (auth ou session)
+     */
     protected function getIdentifier()
     {
         return auth()->check() 
@@ -16,28 +32,46 @@ class WishlistService
 
     public function add($productId)
     {
-        $product = Product::findOrFail($productId);
-        $identifier = $this->getIdentifier();
-        
-        $wishlist = Wishlist::where('product_id', $productId)
-            ->where($identifier)
-            ->first();
+        try {
+            $product = Product::findOrFail($productId);
             
-        if (!$wishlist) {
-            Wishlist::create(array_merge($identifier, ['product_id' => $productId]));
-            return true;
+            $wishlist = Wishlist::where('product_id', $productId)
+                ->where($this->identifier)
+                ->first();
+                
+            if (!$wishlist) {
+                Wishlist::create(array_merge($this->identifier, ['product_id' => $productId]));
+                
+                // Invalider le cache
+                cache()->forget('wishlist_item_' . md5(json_encode($this->identifier) . '_' . $productId));
+                cache()->forget('wishlist_count_' . md5(json_encode($this->identifier)));
+                
+                return true;
+            }
+            
+            return false; // Déjà dans la wishlist
+        } catch (\Exception $e) {
+            report($e);
+            return false;
         }
-        
-        return false; // Déjà dans la wishlist
     }
 
     public function remove($productId)
     {
-        $identifier = $this->getIdentifier();
-        
-        return Wishlist::where('product_id', $productId)
-            ->where($identifier)
-            ->delete();
+        try {
+            $result = Wishlist::where('product_id', $productId)
+                ->where($this->identifier)
+                ->delete();
+                
+            // Invalider le cache
+            cache()->forget('wishlist_item_' . md5(json_encode($this->identifier) . '_' . $productId));
+            cache()->forget('wishlist_count_' . md5(json_encode($this->identifier)));
+            
+            return $result;
+        } catch (\Exception $e) {
+            report($e);
+            return false;
+        }
     }
 
     public function toggle($productId)
@@ -53,33 +87,65 @@ class WishlistService
 
     public function isInWishlist($productId)
     {
-        $identifier = $this->getIdentifier();
-        
-        return Wishlist::where('product_id', $productId)
-            ->where($identifier)
-            ->exists();
+        try {
+            // Utiliser une requête cachée pour optimiser les performances
+            return cache()->remember(
+                'wishlist_item_' . md5(json_encode($this->identifier) . '_' . $productId),
+                now()->addMinutes(30),
+                function() use ($productId) {
+                    return Wishlist::where('product_id', $productId)
+                        ->where($this->identifier)
+                        ->exists();
+                }
+            );
+        } catch (\Exception $e) {
+            // En cas d'erreur, retourner false plutôt que de faire planter l'application
+            report($e); // Enregistre l'erreur dans les logs
+            return false;
+        }
     }
 
     public function getWishlist()
     {
-        $identifier = $this->getIdentifier();
-        
-        return Wishlist::with('product')
-            ->where($identifier)
-            ->get();
+        try {
+            return Wishlist::with('product')
+                ->where($this->identifier)
+                ->get();
+        } catch (\Exception $e) {
+            report($e);
+            return collect(); // Retourne une collection vide en cas d'erreur
+        }
     }
 
     public function getCount()
     {
-        $identifier = $this->getIdentifier();
-        
-        return Wishlist::where($identifier)->count();
+        try {
+            // Utiliser une requête cachée pour optimiser les performances
+            return cache()->remember(
+                'wishlist_count_' . md5(json_encode($this->identifier)),
+                now()->addMinutes(30),
+                function() {
+                    return Wishlist::where($this->identifier)->count();
+                }
+            );
+        } catch (\Exception $e) {
+            report($e);
+            return 0;
+        }
     }
 
     public function clear()
     {
-        $identifier = $this->getIdentifier();
-        
-        return Wishlist::where($identifier)->delete();
+        try {
+            $result = Wishlist::where($this->identifier)->delete();
+            
+            // Supprimer tous les caches liés à cet identifiant
+            cache()->forget('wishlist_count_' . md5(json_encode($this->identifier)));
+            
+            return $result;
+        } catch (\Exception $e) {
+            report($e);
+            return false;
+        }
     }
 }

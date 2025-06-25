@@ -12,6 +12,7 @@
             class="btn {{ $inWishlist ? 'btn-danger' : 'btn-outline-danger' }} btn-sm"
             wire:click="toggleWishlist"
             wire:loading.attr="disabled"
+            wire:target="toggleWishlist"
             title="{{ $inWishlist ? 'Retirer des favoris' : 'Ajouter aux favoris' }}"
         >
             <span wire:loading.remove>
