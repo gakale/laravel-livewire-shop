@@ -6,6 +6,26 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
+    /**
+     * Vérifie si un index existe déjà sur une table
+     *
+     * @param string $table Le nom de la table
+     * @param string $indexName Le nom de l'index
+     * @return bool
+     */
+    private function hasIndex($table, $indexName)
+    {
+        $conn = Schema::getConnection();
+        $dbSchemaManager = $conn->getDoctrineSchemaManager();
+        
+        try {
+            $doctrineTable = $dbSchemaManager->listTableDetails($table);
+            return $doctrineTable->hasIndex($indexName);
+        } catch (\Exception $e) {
+            return false; // La table n'existe pas encore
+        }
+    }
+    
     public function up()
     {
         // Table des codes promo
@@ -44,8 +64,14 @@ return new class extends Migration
             $table->foreignId('product_id')->constrained('shop_products')->onDelete('cascade');
             $table->timestamps();
             
-            $table->index(['session_id', 'product_id']);
-            $table->index(['user_id', 'product_id']);
+            // Créer les index de façon sécurisée
+            if (!$this->hasIndex('shop_wishlists', 'shop_wishlists_session_id_product_id_index')) {
+                $table->index(['session_id', 'product_id']);
+            }
+            
+            if (!$this->hasIndex('shop_wishlists', 'shop_wishlists_user_id_product_id_index')) {
+                $table->index(['user_id', 'product_id']);
+            }
         });
 
         // Ajouter des colonnes aux produits
@@ -58,10 +84,33 @@ return new class extends Migration
             $table->integer('reviews_count')->default(0)->after('average_rating');
         });
 
+        // Créer la table shop_orders si elle n'existe pas déjà
+        if (!Schema::hasTable('shop_orders')) {
+            Schema::create('shop_orders', function (Blueprint $table) {
+                $table->id();
+                $table->string('order_number')->unique();
+                $table->enum('status', ['pending', 'processing', 'completed', 'cancelled'])->default('pending');
+                $table->decimal('total', 10, 2);
+                $table->decimal('subtotal', 10, 2);
+                $table->decimal('tax', 10, 2)->default(0);
+                $table->decimal('shipping', 10, 2)->default(0);
+                $table->string('currency')->default('USD');
+                $table->json('shipping_address')->nullable();
+                $table->json('billing_address')->nullable();
+                $table->string('payment_method')->nullable();
+                $table->string('payment_id')->nullable();
+                $table->timestamps();
+            });
+        }
+        
         // Ajouter colonne coupon aux commandes
         Schema::table('shop_orders', function (Blueprint $table) {
-            $table->foreignId('coupon_id')->nullable()->constrained('shop_coupons')->after('currency');
-            $table->decimal('discount_amount', 10, 2)->default(0)->after('coupon_id');
+            if (!Schema::hasColumn('shop_orders', 'coupon_id')) {
+                $table->foreignId('coupon_id')->nullable()->constrained('shop_coupons')->after('currency');
+            }
+            if (!Schema::hasColumn('shop_orders', 'discount_amount')) {
+                $table->decimal('discount_amount', 10, 2)->default(0)->after('coupon_id');
+            }
         });
     }
 

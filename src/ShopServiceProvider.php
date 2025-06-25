@@ -26,8 +26,36 @@ class ShopServiceProvider extends ServiceProvider
         });
     }
 
+    /**
+     * Vérifie la compatibilité avec la version actuelle de Laravel
+     *
+     * @return bool
+     */
+    private function checkCompatibility()
+    {
+        $laravelVersion = app()->version();
+        $supportedVersions = ['8.*', '9.*', '10.*', '11.*', '12.*'];
+        
+        foreach ($supportedVersions as $version) {
+            if (version_compare($laravelVersion, str_replace('.*', '.0', $version), '>=') && 
+                version_compare($laravelVersion, str_replace('.*', '.999', $version), '<=')) {
+                return true;
+            }
+        }
+        
+        $this->app->booted(function () use ($laravelVersion, $supportedVersions) {
+            $supportedVersionsString = implode(', ', $supportedVersions);
+            throw new \Exception("Laravel Livewire Shop n'est pas compatible avec Laravel $laravelVersion. Versions supportées: $supportedVersionsString");
+        });
+        
+        return false;
+    }
+    
     public function boot()
     {
+        // Vérifier la compatibilité avec la version de Laravel
+        $this->checkCompatibility();
+        
         // Publier les assets
         $this->publishes([
             __DIR__.'/../config/livewire-shop.php' => config_path('livewire-shop.php'),

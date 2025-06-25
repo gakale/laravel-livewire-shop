@@ -6,13 +6,38 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
+    /**
+     * Vérifie si un index existe déjà sur une table
+     *
+     * @param string $table Le nom de la table
+     * @param string $indexName Le nom de l'index
+     * @return bool
+     */
+    private function hasIndex($table, $indexName)
+    {
+        $conn = Schema::getConnection();
+        $dbSchemaManager = $conn->getDoctrineSchemaManager();
+        $doctrineTable = $dbSchemaManager->listTableDetails($table);
+        
+        return $doctrineTable->hasIndex($indexName);
+    }
+    
     public function up()
     {
         // Ajouter user_id aux commandes pour le tracking client
         Schema::table('shop_orders', function (Blueprint $table) {
-            $table->foreignId('user_id')->nullable()->after('id');
-            $table->index(['user_id', 'created_at']);
-            $table->index(['status', 'created_at']);
+            if (!Schema::hasColumn('shop_orders', 'user_id')) {
+                $table->foreignId('user_id')->nullable()->after('id');
+            }
+            
+            // Vérifier si les index existent avant de les créer
+            if (!$this->hasIndex('shop_orders', 'shop_orders_user_id_created_at_index')) {
+                $table->index(['user_id', 'created_at']);
+            }
+            
+            if (!$this->hasIndex('shop_orders', 'shop_orders_status_created_at_index')) {
+                $table->index(['status', 'created_at']);
+            }
         });
 
         // Table pour tracker les vues de produits
