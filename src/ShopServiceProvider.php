@@ -1,6 +1,6 @@
 <?php
 
-namespace VotreNamespace\LaravelLivewireShop;
+namespace LaravelLivewireShop\LaravelLivewireShop;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Route;

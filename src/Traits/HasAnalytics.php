@@ -1,8 +1,8 @@
 <?php
 
-namespace VotreNamespace\LaravelLivewireShop\Traits;
+namespace LaravelLivewireShop\LaravelLivewireShop\Traits;
 
-use VotreNamespace\LaravelLivewireShop\Models\Order;
+use LaravelLivewireShop\LaravelLivewireShop\Models\Order;
 use Carbon\Carbon;
 
 trait HasAnalytics

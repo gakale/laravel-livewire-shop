@@ -1,13 +1,13 @@
 <?php
 
-namespace VotreNamespace\LaravelLivewireShop\Services;
+namespace LaravelLivewireShop\LaravelLivewireShop\Services;
 
-use VotreNamespace\LaravelLivewireShop\Models\Order;
-use VotreNamespace\LaravelLivewireShop\Models\OrderItem;
-use VotreNamespace\LaravelLivewireShop\Models\Product;
-use VotreNamespace\LaravelLivewireShop\Events\OrderCreated;
-use VotreNamespace\LaravelLivewireShop\Events\OrderStatusChanged;
-use Illuminate\Support\Facades\DB;
+use LaravelLivewireShop\LaravelLivewireShop\Models\Order;
+use LaravelLivewireShop\LaravelLivewireShop\Models\OrderItem;
+use LaravelLivewireShop\LaravelLivewireShop\Models\Product;
+use LaravelLivewireShop\LaravelLivewireShop\Events\OrderCreated;
+use LaravelLivewireShop\LaravelLivewireShop\Events\OrderStatusChanged;
+use LaravelLivewireShop\Support\Facades\DB;
 
 class OrderService
 {

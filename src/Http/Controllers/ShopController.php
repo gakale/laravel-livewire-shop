@@ -1,10 +1,10 @@
 <?php
 
-namespace VotreNamespace\LaravelLivewireShop\Http\Controllers;
+namespace LaravelLivewireShop\LaravelLivewireShop\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
-use VotreNamespace\LaravelLivewireShop\Models\Product;
+use LaravelLivewireShop\LaravelLivewireShop\Models\Product;
 
 class ShopController extends Controller
 {

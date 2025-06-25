@@ -1,10 +1,10 @@
 <?php
 
-namespace VotreNamespace\LaravelLivewireShop\Components;
+namespace LaravelLivewireShop\LaravelLivewireShop\Components;
 
 use Livewire\Component;
 use Livewire\WithPagination;
-use VotreNamespace\LaravelLivewireShop\Models\Product;
+use LaravelLivewireShop\LaravelLivewireShop\Models\Product;
 use Illuminate\Support\Facades\DB;
 
 class ProductSearch extends Component

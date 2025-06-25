@@ -1,6 +1,6 @@
 <?php
 
-namespace VotreNamespace\LaravelLivewireShop\Http\Controllers;
+namespace LaravelLivewireShop\LaravelLivewireShop\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;

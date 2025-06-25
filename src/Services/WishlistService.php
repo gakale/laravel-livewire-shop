@@ -1,9 +1,9 @@
 <?php
 
-namespace VotreNamespace\LaravelLivewireShop\Services;
+namespace LaravelLivewireShop\LaravelLivewireShop\Services;
 
-use VotreNamespace\LaravelLivewireShop\Models\Wishlist;
-use VotreNamespace\LaravelLivewireShop\Models\Product;
+use LaravelLivewireShop\LaravelLivewireShop\Models\Wishlist;
+use LaravelLivewireShop\LaravelLivewireShop\Models\Product;
 
 class WishlistService
 {

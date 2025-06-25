@@ -1,6 +1,6 @@
 <?php
 
-namespace VotreNamespace\LaravelLivewireShop\Console\Commands;
+namespace LaravelLivewireShop\LaravelLivewireShop\Console\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\File;

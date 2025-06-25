@@ -1,9 +1,9 @@
 <?php
 
-namespace VotreNamespace\LaravelLivewireShop\Console\Commands;
+namespace LaravelLivewireShop\LaravelLivewireShop\Console\Commands;
 
 use Illuminate\Console\Command;
-use VotreNamespace\LaravelLivewireShop\Models\Product;
+use LaravelLivewireShop\LaravelLivewireShop\Models\Product;
 
 class CreateProductCommand extends Command
 {

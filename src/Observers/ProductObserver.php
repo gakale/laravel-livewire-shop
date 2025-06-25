@@ -1,9 +1,9 @@
 <?php
 
-namespace VotreNamespace\LaravelLivewireShop\Observers;
+namespace LaravelLivewireShop\LaravelLivewireShop\Observers;
 
-use VotreNamespace\LaravelLivewireShop\Models\Product;
-use VotreNamespace\LaravelLivewireShop\Services\CacheService;
+use LaravelLivewireShop\LaravelLivewireShop\Models\Product;
+use LaravelLivewireShop\LaravelLivewireShop\Services\CacheService;
 
 class ProductObserver
 {

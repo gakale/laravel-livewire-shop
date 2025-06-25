@@ -3,7 +3,7 @@
 namespace VotreNamespace\LaravelLivewireShop\Services;
 
 use Illuminate\Support\Facades\Cache;
-use VotreNamespace\LaravelLivewireShop\Models\Product;
+use LaravelLivewireShop\LaravelLivewireShop\Models\Product;
 
 class CacheService
 {

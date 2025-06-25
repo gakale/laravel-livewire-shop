@@ -1,9 +1,9 @@
 <?php
 
-namespace VotreNamespace\LaravelLivewireShop\Components;
+namespace LaravelLivewireShop\LaravelLivewireShop\Components;
 
 use Livewire\Component;
-use VotreNamespace\LaravelLivewireShop\Services\OrderService;
+use LaravelLivewireShop\LaravelLivewireShop\Services\OrderService;
 
 class Checkout extends Component
 {

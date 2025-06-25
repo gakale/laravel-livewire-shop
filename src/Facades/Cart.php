@@ -1,6 +1,6 @@
 <?php
 
-namespace VotreNamespace\LaravelLivewireShop\Facades;
+namespace LaravelLivewireShop\LaravelLivewireShop\Facades;
 
 use Illuminate\Support\Facades\Facade;
 

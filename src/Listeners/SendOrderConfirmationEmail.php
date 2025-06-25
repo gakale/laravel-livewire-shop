@@ -1,9 +1,9 @@
 <?php
 
-namespace VotreNamespace\LaravelLivewireShop\Listeners;
+namespace LaravelLivewireShop\LaravelLivewireShop\Listeners;
 
-use VotreNamespace\LaravelLivewireShop\Events\OrderCreated;
-use VotreNamespace\LaravelLivewireShop\Mail\OrderConfirmationMail;
+use LaravelLivewireShop\LaravelLivewireShop\Events\OrderCreated;
+use LaravelLivewireShop\LaravelLivewireShop\Mail\OrderConfirmationMail;
 use Illuminate\Support\Facades\Mail;
 
 class SendOrderConfirmationEmail

@@ -3,8 +3,8 @@
 namespace VotreNamespace\LaravelLivewireShop\Components;
 
 use Livewire\Component;
-use VotreNamespace\LaravelLivewireShop\Models\Product;
-use VotreNamespace\LaravelLivewireShop\Models\Review;
+use LaravelLivewireShop\LaravelLivewireShop\Models\Product;
+use LaravelLivewireShop\LaravelLivewireShop\Models\Review;
 
 class ProductReviews extends Component
 {

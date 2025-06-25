@@ -1,10 +1,10 @@
 <?php
 
-namespace VotreNamespace\LaravelLivewireShop\Components;
+namespace LaravelLivewireShop\LaravelLivewireShop\Components;
 
 use Livewire\Component;
-use VotreNamespace\LaravelLivewireShop\Services\WishlistService;
-use VotreNamespace\LaravelLivewireShop\Models\Product;
+use LaravelLivewireShop\LaravelLivewireShop\Services\WishlistService;
+use LaravelLivewireShop\LaravelLivewireShop\Models\Product;
 
 class AddToWishlist extends Component
 {

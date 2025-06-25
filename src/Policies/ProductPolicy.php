@@ -1,8 +1,8 @@
 <?php
 
-namespace VotreNamespace\LaravelLivewireShop\Policies;
+namespace LaravelLivewireShop\LaravelLivewireShop\Policies;
 
-use VotreNamespace\LaravelLivewireShop\Models\Product;
+use LaravelLivewireShop\LaravelLivewireShop\Models\Product;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class ProductPolicy

@@ -1,10 +1,10 @@
 <?php
 
-namespace VotreNamespace\LaravelLivewireShop\Services;
+namespace LaravelLivewireShop\LaravelLivewireShop\Services;
 
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Session;
-use VotreNamespace\LaravelLivewireShop\Models\Product;
+use LaravelLivewireShop\LaravelLivewireShop\Models\Product;
 
 class CartService
 {

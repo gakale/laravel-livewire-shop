@@ -1,9 +1,9 @@
 <?php
 
-namespace VotreNamespace\LaravelLivewireShop\Components;
+namespace LaravelLivewireShop\LaravelLivewireShop\Components;
 
 use Livewire\Component;
-use VotreNamespace\LaravelLivewireShop\Services\WishlistService;
+use LaravelLivewireShop\LaravelLivewireShop\Services\WishlistService;
 
 class WishlistIcon extends Component
 {

@@ -1,9 +1,9 @@
 <?php
 
-namespace VotreNamespace\LaravelLivewireShop\Jobs;
+namespace LaravelLivewireShop\LaravelLivewireShop\Jobs;
 
-use VotreNamespace\LaravelLivewireShop\Models\Order;
-use VotreNamespace\LaravelLivewireShop\Mail\OrderStatusUpdateMail;
+use LaravelLivewireShop\LaravelLivewireShop\Models\Order;
+use LaravelLivewireShop\LaravelLivewireShop\Mail\OrderStatusUpdateMail;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;

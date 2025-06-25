@@ -1,8 +1,8 @@
 <?php
 
-namespace VotreNamespace\LaravelLivewireShop\Services;
+namespace LaravelLivewireShop\LaravelLivewireShop\Services;
 
-use VotreNamespace\LaravelLivewireShop\Models\Coupon;
+use LaravelLivewireShop\LaravelLivewireShop\Models\Coupon;
 
 class CouponService
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace VotreNamespace\LaravelLivewireShop\Components;
+namespace LaravelLivewireShop\LaravelLivewireShop\Components;
 
 use Livewire\Component;
 

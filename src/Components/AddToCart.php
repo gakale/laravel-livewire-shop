@@ -1,10 +1,10 @@
 <?php
 
-namespace VotreNamespace\LaravelLivewireShop\Components;
+namespace LaravelLivewireShop\LaravelLivewireShop\Components;
 
 use Livewire\Component;
-use VotreNamespace\LaravelLivewireShop\Facades\Cart;
-use VotreNamespace\LaravelLivewireShop\Models\Product;
+use LaravelLivewireShop\LaravelLivewireShop\Facades\Cart;
+use LaravelLivewireShop\LaravelLivewireShop\Models\Product;
 
 class AddToCart extends Component
 {

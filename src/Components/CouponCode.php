@@ -1,9 +1,9 @@
 <?php
 
-namespace VotreNamespace\LaravelLivewireShop\Components;
+namespace LaravelLivewireShop\LaravelLivewireShop\Components;
 
 use Livewire\Component;
-use VotreNamespace\LaravelLivewireShop\Services\CouponService;
+use LaravelLivewireShop\LaravelLivewireShop\Services\CouponService;
 
 class CouponCode extends Component
 {

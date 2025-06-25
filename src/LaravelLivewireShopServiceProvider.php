@@ -1,16 +1,16 @@
 <?php
 
-namespace VotreNamespace\LaravelLivewireShop;
+namespace LaravelLivewireShop\LaravelLivewireShop;
 
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
 use Livewire\Livewire;
-use VotreNamespace\LaravelLivewireShop\Console\Commands\InstallShopCommand;
-use VotreNamespace\LaravelLivewireShop\Console\Commands\OptimizeShopCommand;
-use VotreNamespace\LaravelLivewireShop\Console\Commands\CreateProductsCommand;
-use VotreNamespace\LaravelLivewireShop\View\Components\ProductCard;
-use VotreNamespace\LaravelLivewireShop\Services\CacheService;
-use VotreNamespace\LaravelLivewireShop\Services\OrderService;
+use LaravelLivewireShop\LaravelLivewireShop\Console\Commands\InstallShopCommand;
+use LaravelLivewireShop\LaravelLivewireShop\Console\Commands\OptimizeShopCommand;
+use LaravelLivewireShop\LaravelLivewireShop\Console\Commands\CreateProductsCommand;
+use LaravelLivewireShop\LaravelLivewireShop\View\Components\ProductCard;
+use LaravelLivewireShop\LaravelLivewireShop\Services\CacheService;
+use LaravelLivewireShop\LaravelLivewireShop\Services\OrderService;
 
 class LaravelLivewireShopServiceProvider extends ServiceProvider
 {

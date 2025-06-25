@@ -1,10 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use VotreNamespace\LaravelLivewireShop\Http\Controllers\ShopController;
-use VotreNamespace\LaravelLivewireShop\Http\Controllers\CartController;
-use VotreNamespace\LaravelLivewireShop\Http\Controllers\WishlistController;
-use VotreNamespace\LaravelLivewireShop\Http\Middleware\InitializeCart;
+use LaravelLivewireShop\LaravelLivewireShop\Http\Controllers\ShopController;
+use LaravelLivewireShop\LaravelLivewireShop\Http\Controllers\CartController;
+use LaravelLivewireShop\LaravelLivewireShop\Http\Controllers\WishlistController;
+use LaravelLivewireShop\LaravelLivewireShop\Http\Middleware\InitializeCart;
 
 // Routes for shop
 Route::prefix(config('livewire-shop.routes.shop_prefix', 'boutique'))

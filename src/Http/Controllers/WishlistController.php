@@ -1,9 +1,9 @@
 <?php
 
-namespace VotreNamespace\LaravelLivewireShop\Http\Controllers;
+namespace LaravelLivewireShop\LaravelLivewireShop\Http\Controllers;
 
 use Illuminate\Http\Request;
-use VotreNamespace\LaravelLivewireShop\Services\WishlistService;
+use LaravelLivewireShop\LaravelLivewireShop\Services\WishlistService;
 
 class WishlistController extends Controller
 {

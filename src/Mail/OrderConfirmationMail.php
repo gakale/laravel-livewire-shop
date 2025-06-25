@@ -1,8 +1,8 @@
 <?php
 
-namespace VotreNamespace\LaravelLivewireShop\Mail;
+namespace LaravelLivewireShop\LaravelLivewireShop\Mail;
 
-use VotreNamespace\LaravelLivewireShop\Models\Order;
+use LaravelLivewireShop\LaravelLivewireShop\Models\Order;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;

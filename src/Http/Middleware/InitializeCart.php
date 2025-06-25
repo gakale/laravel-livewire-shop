@@ -1,6 +1,6 @@
 <?php
 
-namespace VotreNamespace\LaravelLivewireShop\Http\Middleware;
+namespace LaravelLivewireShop\LaravelLivewireShop\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;

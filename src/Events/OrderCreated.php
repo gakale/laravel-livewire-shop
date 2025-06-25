@@ -1,8 +1,8 @@
 <?php
 
-namespace VotreNamespace\LaravelLivewireShop\Events;
+namespace LaravelLivewireShop\LaravelLivewireShop\Events;
 
-use VotreNamespace\LaravelLivewireShop\Models\Order;
+use LaravelLivewireShop\LaravelLivewireShop\Models\Order;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
