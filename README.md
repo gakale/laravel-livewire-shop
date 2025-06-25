@@ -52,7 +52,7 @@ Un plugin complet et prêt à l'emploi pour créer une boutique en ligne moderne
 ### 1. Installation via Composer
 
 ```bash
-composer require votre-namespace/laravel-livewire-shop
+composer require LaravelLivewireShop/laravel-livewire-shop
 ```
 
 ### 2. Installation automatique
