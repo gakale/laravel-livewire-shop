@@ -51,6 +51,8 @@ namespace App\Http\Controllers\Shop;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use LaravelLivewireShop\LaravelLivewireShop\Models\Product;
+use LaravelLivewireShop\LaravelLivewireShop\Models\Wishlist;
+use LaravelLivewireShop\LaravelLivewireShop\Facades\Cart;
 
 class ShopController extends Controller
 {
@@ -79,6 +81,56 @@ class ShopController extends Controller
             
         return view('vendor.livewire-shop.pages.search', compact('products', 'query'));
     }
+    
+    /**
+     * Afficher la page wishlist
+     */
+    public function wishlist()
+    {
+        $sessionId = session()->getId();
+        $userId = auth()->check() ? auth()->user()->id : null;
+        
+        $wishlistItems = Wishlist::where(function($query) use ($sessionId, $userId) {
+            $query->where('session_id', $sessionId);
+            
+            if ($userId) {
+                $query->orWhere('user_id', $userId);
+            }
+        })->with('product')->get();
+        
+        return view('vendor.livewire-shop.pages.wishlist', compact('wishlistItems'));
+    }
+    
+    /**
+     * Afficher la page de checkout
+     */
+    public function checkout()
+    {
+        $cart = Cart::getCart();
+        $total = Cart::getTotalWithBreakdown();
+        
+        if (count($cart) === 0) {
+            return redirect()->route('shop.index')
+                ->with('error', 'Votre panier est vide');
+        }
+        
+        return view('vendor.livewire-shop.pages.checkout', compact('cart', 'total'));
+    }
+    
+    /**
+     * Appliquer un coupon au panier
+     */
+    public function applyCoupon(Request $request)
+    {
+        $code = $request->input('code');
+        $success = Cart::applyCoupon($code);
+        
+        if ($success) {
+            return back()->with('success', 'Coupon appliqué avec succès');
+        }
+        
+        return back()->with('error', 'Coupon invalide ou expiré');
+    }
 }
 EOT;
         
@@ -91,9 +143,15 @@ EOT;
 
 use App\Http\Controllers\Shop\ShopController;
 
+// Routes principales de la boutique
 Route::get('/shop', [ShopController::class, 'index'])->name('shop.index');
 Route::get('/shop/product/{slug}', [ShopController::class, 'show'])->name('shop.product.show');
 Route::get('/shop/search', [ShopController::class, 'search'])->name('shop.search');
+
+// Routes requises par les composants Livewire
+Route::get('/shop/wishlist', [ShopController::class, 'wishlist'])->name('livewire-shop.wishlist');
+Route::get('/shop/checkout', [ShopController::class, 'checkout'])->name('livewire-shop.checkout');
+Route::post('/shop/apply-coupon', [ShopController::class, 'applyCoupon'])->name('livewire-shop.apply-coupon');
 
 EOT;
         

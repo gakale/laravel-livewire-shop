@@ -76,10 +76,12 @@ class ShopServiceProvider extends ServiceProvider
                 Console\Commands\CreateProductCommand::class,
                 Console\Commands\OptimizeShopCommand::class,
                 Console\Commands\PublishShopViews::class,
+                Console\Commands\FixComponentViews::class,
             ]);
         }
 
-        // Charger les vues
+        // Charger les vues avec priorité aux vues publiées
+        $this->loadViewsFrom(resource_path('views/vendor/livewire-shop'), 'livewire-shop');
         $this->loadViewsFrom(__DIR__.'/../resources/views', 'livewire-shop');
 
         // Charger les migrations
@@ -88,25 +90,45 @@ class ShopServiceProvider extends ServiceProvider
         // Charger les routes
         $this->loadRoutesFrom(__DIR__.'/routes/web.php');
 
-        // Enregistrer les composants Livewire
-        Livewire::component('shop-cart', Components\ShopCart::class);
-        Livewire::component('add-to-cart', Components\AddToCart::class);
-        Livewire::component('cart-icon', Components\CartIcon::class);
-        Livewire::component('checkout-summary', Components\CheckoutSummary::class);
-        
-        // Nouveaux composants
-        Livewire::component('coupon-code', Components\CouponCode::class);
-        Livewire::component('wishlist-icon', Components\WishlistIcon::class);
-        Livewire::component('add-to-wishlist', Components\AddToWishlist::class);
-        Livewire::component('product-reviews', Components\ProductReviews::class);
-        Livewire::component('product-search', Components\ProductSearch::class);
+        // Enregistrer les composants Livewire avec support des vues publiées ou du vendor
+        $this->registerLivewireComponents();
 
-        // Commandes artisan personnalisées
-        if ($this->app->runningInConsole()) {
-            $this->commands([
-                Console\Commands\InstallShopCommand::class,
-                Console\Commands\CreateProductCommand::class,
-            ]);
+        // Les commandes artisan sont déjà enregistrées plus haut
+    }
+    
+    /**
+     * Enregistre les composants Livewire avec support des vues publiées
+     *
+     * @return void
+     */
+    protected function registerLivewireComponents()
+    {
+        // Liste des composants à enregistrer
+        $components = [
+            'shop-cart' => Components\ShopCart::class,
+            'add-to-cart' => Components\AddToCart::class,
+            'cart-icon' => Components\CartIcon::class,
+            'checkout-summary' => Components\CheckoutSummary::class,
+            'coupon-code' => Components\CouponCode::class,
+            'wishlist-icon' => Components\WishlistIcon::class,
+            'add-to-wishlist' => Components\AddToWishlist::class,
+            'product-reviews' => Components\ProductReviews::class,
+            'product-search' => Components\ProductSearch::class,
+            'advanced-search' => Components\AdvancedSearch::class,
+            'checkout' => Components\Checkout::class
+        ];
+        
+        // Enregistrer chaque composant avec Livewire
+        foreach ($components as $alias => $class) {
+            Livewire::component($alias, $class);
+        }
+        
+        // Vérifier si la classe App\Livewire existe (pour Livewire v3)
+        if (class_exists('\App\Livewire')) {
+            $this->info('Détection de Livewire v3 - Configuration supplémentaire activée');
+            
+            // En Livewire v3, nous pouvons avoir besoin d'enregistrer des alias supplémentaires
+            // pour la compatibilité avec les vues publiées
         }
     }
 }

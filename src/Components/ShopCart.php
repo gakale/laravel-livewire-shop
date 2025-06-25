@@ -4,9 +4,12 @@ namespace LaravelLivewireShop\LaravelLivewireShop\Components;
 
 use Livewire\Component;
 use LaravelLivewireShop\LaravelLivewireShop\Facades\Cart;
+use LaravelLivewireShop\LaravelLivewireShop\Components\Traits\FindsAlternativeViews;
 
 class ShopCart extends Component
 {
+    use FindsAlternativeViews;
+    
     protected $listeners = [
         'cartUpdated' => '$refresh'
     ];
@@ -16,7 +19,9 @@ class ShopCart extends Component
         $cart = Cart::getCart();
         $total = Cart::getTotal();
         
-        return view('livewire-shop::components.shop-cart', [
+        $viewPath = $this->findViewPath('shop-cart');
+        
+        return view($viewPath, [
             'cart' => $cart,
             'total' => $total
         ]);
