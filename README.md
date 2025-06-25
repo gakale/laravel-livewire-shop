@@ -52,7 +52,7 @@ Un plugin complet et prêt à l'emploi pour créer une boutique en ligne moderne
 ### 1. Installation via Composer
 
 ```bash
-composer require laravel_livewire_shop/laravel-livewire-shop:^0.1.2-beta
+composer require laravel_livewire_shop/laravel-livewire-shop:^0.1.6-beta
 ```
 
 ### 2. Publication des ressources
