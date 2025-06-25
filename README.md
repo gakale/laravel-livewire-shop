@@ -55,13 +55,6 @@ Un plugin complet et prêt à l'emploi pour créer une boutique en ligne moderne
 composer require laravel_livewire_shop/laravel-livewire-shop:^0.1.2-beta
 ```
 
-Assurez-vous que votre fichier `composer.json` accepte les versions beta en ajoutant :
-
-```json
-"minimum-stability": "beta",
-"prefer-stable": true
-```
-
 ### 2. Publication des ressources
 
 ```bash
@@ -177,7 +170,7 @@ php artisan view:clear
 ### Avec la facade Cart
 
 ```php
-use VotreNamespace\LaravelLivewireShop\Facades\Cart;
+use LaravelLivewireShop\LaravelLivewireShop\Facades\Cart;
 
 // Ajouter un produit
 Cart::add($productId, $quantity, $attributes);
@@ -195,7 +188,7 @@ Cart::clear();
 ### Service de commande
 
 ```php
-use VotreNamespace\LaravelLivewireShop\Services\OrderService;
+use LaravelLivewireShop\LaravelLivewireShop\Services\OrderService;
 
 $orderService = new OrderService();
 
@@ -370,7 +363,6 @@ resources/views/
 - [Video Tutorials](https://tutorials.ma-boutique.com)
 
 ### Support
-- [Issues GitHub](https://github.com/votre-repo/issues)
 - [Discord Community](https://discord.gg/laravel-shop)
 - Email: support@ma-boutique.com
 
