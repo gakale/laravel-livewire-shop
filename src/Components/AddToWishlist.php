@@ -5,9 +5,12 @@ namespace LaravelLivewireShop\LaravelLivewireShop\Components;
 use Livewire\Component;
 use LaravelLivewireShop\LaravelLivewireShop\Services\WishlistService;
 use LaravelLivewireShop\LaravelLivewireShop\Models\Product;
+use LaravelLivewireShop\LaravelLivewireShop\Components\Traits\FindsAlternativeViews;
 
 class AddToWishlist extends Component
 {
+    use FindsAlternativeViews;
+    
     public $productId;
     public $inWishlist = false;
     
@@ -39,6 +42,7 @@ class AddToWishlist extends Component
     
     public function render()
     {
-        return view('livewire-shop::components.add-to-wishlist');
+        $viewPath = $this->findViewPath('add-to-wishlist');
+        return view($viewPath);
     }
 }
