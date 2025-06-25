@@ -52,10 +52,17 @@ Un plugin complet et prêt à l'emploi pour créer une boutique en ligne moderne
 ### 1. Installation via Composer
 
 ```bash
-composer require votre-namespace/laravel-livewire-shop
+composer require laravel_livewire_shop/laravel-livewire-shop:^0.1.2-beta
 ```
 
-### 2. Installation automatique
+Assurez-vous que votre fichier `composer.json` accepte les versions beta en ajoutant :
+
+```json
+"minimum-stability": "beta",
+"prefer-stable": true
+```
+
+### 2. Publication des ressources
 
 ```bash
 php artisan shop:install
@@ -67,7 +74,28 @@ Cette commande configure tout automatiquement :
 - ✅ Crée des données d'exemple
 - ✅ Configure les routes
 
-### 3. Ajout des routes (automatique)
+Vous pouvez également publier manuellement les ressources :
+
+```bash
+# Configuration
+php artisan vendor:publish --tag=livewire-shop-config
+
+# Vues
+php artisan vendor:publish --tag=livewire-shop-views
+
+# Migrations
+php artisan vendor:publish --tag=livewire-shop-migrations
+```
+
+### 3. Publication des vues et des contrôleurs
+
+Pour configurer correctement les contrôleurs et les routes nécessaires :
+
+```bash
+php artisan shop:publish-views
+```
+
+### 4. Ajout des routes (automatique)
 
 Le fichier `routes/shop.php` est créé automatiquement. Ajoutez dans votre `RouteServiceProvider` :
 
@@ -106,6 +134,44 @@ Route::middleware('web')->group(base_path('routes/shop.php'));
 
 {{-- Code promo --}}
 <livewire:coupon-code />
+```
+
+## 🔧 Résolution des problèmes courants
+
+### Erreur dans la vue shop.blade.php
+
+Si vous rencontrez une erreur concernant la variable `$products` non définie dans la vue shop.blade.php, exécutez :
+
+```bash
+php artisan shop:publish-views
+```
+
+Cette commande configurera automatiquement les contrôleurs et les routes nécessaires pour faire fonctionner la boutique dans votre application.
+
+### Migrations et tables manquantes
+
+Si vous rencontrez des erreurs lors des migrations, comme des tables manquantes ou des colonnes dupliquées, assurez-vous d'utiliser la version `^0.1.1-beta` ou supérieure du package qui corrige ces problèmes.
+
+```bash
+composer require laravel_livewire_shop/laravel-livewire-shop:^0.1.2-beta
+```
+
+### Vérification de compatibilité avec Laravel
+
+Le package est compatible avec Laravel 8, 9, 10, 11 et 12. Si vous rencontrez des erreurs de compatibilité, vérifiez votre version de Laravel avec :
+
+```bash
+php artisan --version
+```
+
+### Problèmes de cache
+
+En cas de comportement inattendu, essayez de vider les caches :
+
+```bash
+php artisan cache:clear
+php artisan config:clear
+php artisan view:clear
 ```
 
 ### Avec la facade Cart
