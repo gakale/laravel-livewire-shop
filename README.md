@@ -111,7 +111,7 @@ Route::middleware('web')->group(base_path('routes/shop.php'));
 ### Avec la facade Cart
 
 ```php
-use VotreNamespace\LaravelLivewireShop\Facades\Cart;
+use LaravelLivewireShop\LaravelLivewireShop\Facades\Cart;
 
 // Ajouter un produit
 Cart::add($productId, $quantity, $attributes);
@@ -129,7 +129,7 @@ Cart::clear();
 ### Service de commande
 
 ```php
-use VotreNamespace\LaravelLivewireShop\Services\OrderService;
+use LaravelLivewireShop\LaravelLivewireShop\Services\OrderService;
 
 $orderService = new OrderService();
 
@@ -304,7 +304,6 @@ resources/views/
 - [Video Tutorials](https://tutorials.ma-boutique.com)
 
 ### Support
-- [Issues GitHub](https://github.com/votre-repo/issues)
 - [Discord Community](https://discord.gg/laravel-shop)
 - Email: support@ma-boutique.com
 
