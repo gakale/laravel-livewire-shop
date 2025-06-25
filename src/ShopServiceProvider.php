@@ -68,6 +68,16 @@ class ShopServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__.'/../database/migrations' => database_path('migrations'),
         ], 'livewire-shop-migrations');
+        
+        // Enregistrer les commandes
+        if ($this->app->runningInConsole()) {
+            $this->commands([
+                Console\Commands\InstallShopCommand::class,
+                Console\Commands\CreateProductCommand::class,
+                Console\Commands\OptimizeShopCommand::class,
+                Console\Commands\PublishShopViews::class,
+            ]);
+        }
 
         // Charger les vues
         $this->loadViewsFrom(__DIR__.'/../resources/views', 'livewire-shop');

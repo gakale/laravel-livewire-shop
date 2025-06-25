@@ -14,8 +14,9 @@
     </div>
     
     <div class="row">
-        @foreach($products as $product)
-            <div class="col-md-4 col-lg-3 mb-4">
+        @if(isset($products) && count($products) > 0)
+            @foreach($products as $product)
+                <div class="col-md-4 col-lg-3 mb-4">
                 <div class="card h-100 product-card">
                     @if($product->image)
                         <img src="{{ asset('storage/' . $product->image) }}" class="card-img-top" alt="{{ $product->name }}">
@@ -58,8 +59,18 @@
                         </div>
                     </div>
                 </div>
+                </div>
+            @endforeach
+        @else
+            <div class="col-12 text-center py-5">
+                <div class="alert alert-info">
+                    <h4>Aucun produit disponible pour le moment</h4>
+                    <p>Veuillez revenir plus tard ou contacter l'administrateur du site.</p>
+                </div>
+                <p class="text-muted small mt-3">Si vous êtes l'administrateur et que vous voyez ce message, veuillez exécuter la commande suivante pour configurer correctement la boutique :</p>
+                <pre class="bg-light p-2 d-inline-block">php artisan shop:publish-views</pre>
             </div>
-        @endforeach
+        @endif
     </div>
     
     <div class="mt-4 d-flex justify-content-center">
